@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block PageTitle %} Home {% endblock %}
+{% block Title %} Books {% endblock %}
+
+{% block content %}
+
+    <div class="container mt-4">
+        <h2>Books</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">No. of Pages</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                 <tr>
+                     <td> {{book.id}}</td>
+                     <td> {{book.title}}</td>
+                     <td> {{book.author}}</td>
+                     <td>{{book.no_of_pages}}</td>
+                     <td> {{book.price}}</td>
+
+                     <td> <img style="width: 100px; height: 100px" src="{% static './images/one.jpg' %}"> </td>
+                     <td> <a href="about.html" class="btn btn-primary">Show</a></td>
+                 </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
