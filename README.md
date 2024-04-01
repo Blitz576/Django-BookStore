@@ -22,7 +22,7 @@ source ./venv/Scripts
 
 # install Requirements
 
-pip install -r Requirements.txt
+pip install -r requirements.txt
 
 
 ```
