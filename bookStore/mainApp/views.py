@@ -1,6 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,redirect
+import json
 
+from .models import Book
 
 books = [
     {
@@ -35,11 +37,18 @@ books = [
         "price": 9.99,
         "image": "four.jpg"
     },
-
 ]
 
+# def index(request):
+#     return render(request, 'mainApp/index.html', context={'books': books})
+
+
 def index(request):
-    return render(request, 'mainApp/index.html',context={'books':books})
+    books_queryset = Book.objects.all()
+    print(books_queryset)
+    books_list = [{'id': book.id, 'title': book.title, 'no_of_pages': book.no_of_pages,
+                   'author': book.author, 'price': book.price, 'image': book.image} for book in books_queryset]
+    return HttpResponse(json.dumps(books_list), content_type='application/json')
 
 
 def about(request):
@@ -48,9 +57,8 @@ def about(request):
 def contact(request):
     return render(request, 'mainApp/contact.html')
 
-def bookDetails(request,id):
-    for book in books:
-        if book['id'] == id:
-            print(book)
-            return render(request, 'mainApp/bookDetails.html',context={"book": book})
-    return HttpResponse(status=404,content_type='text/plain',body="Book not found")
+def bookDetails(request, id):
+    book_id = int(id)
+    book = get_object_or_404(books, id=book_id)
+    return render(request, 'mainApp/bookDetails.html', {'book': book})
+
