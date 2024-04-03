@@ -59,6 +59,6 @@ def contact(request):
 
 def bookDetails(request, id):
     book_id = int(id)
-    book = get_object_or_404(books, id=book_id)
+    book = get_object_or_404(Book, id=book_id)
     return render(request, 'mainApp/bookDetails.html', {'book': book})
 

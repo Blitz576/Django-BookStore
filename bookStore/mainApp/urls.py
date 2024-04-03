@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import index,about,contact,bookDetails
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
  # path('index',index,name='index'),
