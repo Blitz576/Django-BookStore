@@ -4,7 +4,7 @@
 {% block Title %} Books {% endblock %}
 
 {% block content %}
-
+    <a class="btn btn-primary" href="{% url 'addBook' %}">Add New Book</a>
     <div class="container mt-4">
         <h2>Books</h2>
         <table class="table">
@@ -28,8 +28,9 @@
                      <td>{{book.no_of_pages}}</td>
                      <td> {{book.price}}</td>
 
-                     <td> <img style="width: 100px; height: 100px" src="{% static './images/one.jpg' %}"> </td>
+                     <td> <img style="width: 100px; height: 100px" src="{{ book.get_absolute_url }}"> </td>
                      <td> <a href="{% url 'bookDetails' book.id %}" class="btn btn-primary">Show</a></td>
+                     <td> <a href="{{ book.delete_url }}" class="btn btn-danger">Delete</a></td>
                  </tr>
                 {% endfor %}
             </tbody>

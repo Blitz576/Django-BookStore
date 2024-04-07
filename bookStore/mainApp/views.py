@@ -45,11 +45,8 @@ books = [
 
 def index(request):
     books_queryset = Book.objects.all()
-    print(books_queryset)
-    books_list = [{'id': book.id, 'title': book.title, 'no_of_pages': book.no_of_pages,
-                   'author': book.author, 'price': book.price, 'image': book.image} for book in books_queryset]
-    return HttpResponse(json.dumps(books_list), content_type='application/json')
-
+   # print(books_queryset)
+    return render(request, 'mainApp/index.html', {'books': books_queryset})
 
 def about(request):
     return render(request, 'mainApp/about.html')
@@ -62,3 +59,26 @@ def bookDetails(request, id):
     book = get_object_or_404(Book, id=book_id)
     return render(request, 'mainApp/bookDetails.html', {'book': book})
 
+
+
+def addBookForm(request):
+    return render(request, 'mainApp/addBook.html')
+def addBook(request):
+    if request.method == 'POST':
+        if request.FILES:
+            image = request.FILES["image"]
+        else:
+            image = None
+        print(request.POST)
+        product = Book(title=request.POST["title"], price=request.POST["price"],
+                          author=request.POST["author"],no_of_pages=request.POST["no_of_pages"], image=image)
+        product.save()
+        return redirect('index')
+    return render(request, 'mainApp/addBook.html')
+
+def deleteBook(request, id):
+    book = get_object_or_404(Book, id=id)
+    book.delete()
+    return redirect('index')
+def updateBook(request, id):
+    pass

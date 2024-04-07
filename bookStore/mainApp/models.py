@@ -14,6 +14,8 @@ class Book(models.Model):
 
     @property
     def get_absolute_url(self):
-        url = reverse('bookDetails',args=[self.id])
-        return url
+        return f"/media/{self.image}"
 
+    @property
+    def delete_url(self):
+        return reverse('deleteBook',args=[self.id])
