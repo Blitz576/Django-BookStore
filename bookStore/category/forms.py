@@ -3,5 +3,5 @@ from .models import Category
 
 class CategoryForm(forms.ModelForm):
     class Meta:
-        model = category
+        model = Category
         fields = '__all__'

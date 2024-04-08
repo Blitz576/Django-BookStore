@@ -1,6 +1,6 @@
 from django.db import models
 from django.shortcuts import reverse
-from ..category.models import Category
+from category.models import Category
 # Model
 class Book(models.Model):
     title = models.CharField(max_length=200)
