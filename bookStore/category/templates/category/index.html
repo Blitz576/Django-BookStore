@@ -20,18 +20,16 @@
                 </tr>
             </thead>
             <tbody>
-                {% for book in books %}
+                {% for category in categories %}
                  <tr>
-                     <td> {{book.id}}</td>
-                     <td> {{book.title}}</td>
-                     <td> {{book.author}}</td>
-                     <td>{{book.no_of_pages}}</td>
-                     <td> {{book.price}}</td>
+                     <td> {{category.id}}</td>
+                     <td> {{category.name}}</td>
+                     <td> {{category.description}}</td>
 
-                     <td> <img style="width: 100px; height: 100px" src="{{ book.get_absolute_url }}"> </td>
-                     <td> <a href="{% url 'bookDetails' book.id %}" class="btn btn-primary">Show</a></td>
-                     <td> <a href="{{ book.get_edit_url }}" class="btn btn-warning">Edit</a></td>
-                     <td> <a href="{{ book.delete_url }}" class="btn btn-danger">Delete</a></td>
+                     <td> <img style="width: 100px; height: 100px" src="{{ category.logo_url }}"> </td>
+                     <td> <a href="{% url 'categoryDetails' category.id %}" class="btn btn-primary">Show</a></td>
+                     <td> <a href="{{ category.get_edit_url }}" class="btn btn-warning">Edit</a></td>
+                     <td> <a href="{{ category.delete_url }}" class="btn btn-danger">Delete</a></td>
                  </tr>
                 {% endfor %}
             </tbody>
