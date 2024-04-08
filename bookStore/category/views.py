@@ -12,8 +12,8 @@ def index(request):
     return render(request, 'category/index.html', {'categories': categories})
 
 
-def categoryDetails(request, category_id):
-    category = get_object_or_404(Category, pk=category_id)  # Use primary key (pk) for clarity
+def categoryDetails(request, id):
+    category = get_object_or_404(Category, pk=id)  # Use primary key (pk) for clarity
     return render(request, 'category/categoryDetails.html', {'category': category})
 
 
@@ -28,14 +28,14 @@ def addCategory(request):
     return render(request, 'category/addCategory.html', {'category_form': category_form})
 
 
-def deleteCategory(request, category_id):
-    category = get_object_or_404(Category, pk=category_id)
+def deleteCategory(request, id):
+    category = get_object_or_404(Category, pk=id)
     category.delete()
     return redirect('index')
 
 
-def updateCategory(request, category_id):
-    category = get_object_or_404(Category, pk=category_id)
+def updateCategory(request, id):
+    category = get_object_or_404(Category, pk=id)
     category_form = CategoryForm(request.POST or None, request.FILES or None, instance=category)
 
     if request.method == 'POST':
