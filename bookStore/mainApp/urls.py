@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index,about,contact,bookDetails
+from .views import index,about,contact,bookDetails , addBook , deleteBook , updateBook
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -13,7 +13,8 @@ urlpatterns = [
  path('',index,name='index'),
  path('about',about,name='about'),
  path('contact',contact,name='contact'),
- path('<int:id>',bookDetails,name='bookDetails')
-
-
+ path('<int:id>',bookDetails,name='bookDetails'),
+ path ('addBook' ,addBook , name='addBook'),
+ path('<int:id>/delete', deleteBook , name='deleteBook'),
+ path('<int:id>/update',updateBook,name='updateBook'),
 ]

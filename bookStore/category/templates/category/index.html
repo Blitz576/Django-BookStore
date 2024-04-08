@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block PageTitle %} Home {% endblock %}
+{% block Title %} Categories {% endblock %}
+
+{% block content %}
+    <a class="btn btn-primary" href="{% url 'addCategory' %}">Add New Category</a>
+    <div class="container mt-4">
+        <h2>Categories</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">No. of Pages</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                 <tr>
+                     <td> {{category.id}}</td>
+                     <td> {{category.name}}</td>
+                     <td> {{category.description}}</td>
+
+                     <td> <img style="width: 100px; height: 100px" src="{{ category.logo_url }}"> </td>
+                     <td> <a href="{% url 'categoryDetails' category.id %}" class="btn btn-primary">Show</a></td>
+                     <td> <a href="{{ category.get_edit_url }}" class="btn btn-warning">Edit</a></td>
+                     <td> <a href="{{ category.delete_url }}" class="btn btn-danger">Delete</a></td>
+                 </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

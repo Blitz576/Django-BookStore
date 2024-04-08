@@ -3,7 +3,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 import json
 
 from .models import Book
-
+from .forms import BookForm
 books = [
     {
         "id": 1,
@@ -45,11 +45,8 @@ books = [
 
 def index(request):
     books_queryset = Book.objects.all()
-    print(books_queryset)
-    books_list = [{'id': book.id, 'title': book.title, 'no_of_pages': book.no_of_pages,
-                   'author': book.author, 'price': book.price, 'image': book.image} for book in books_queryset]
-    return HttpResponse(json.dumps(books_list), content_type='application/json')
-
+   # print(books_queryset)
+    return render(request, 'mainApp/index.html', {'books': books_queryset})
 
 def about(request):
     return render(request, 'mainApp/about.html')
@@ -60,5 +57,77 @@ def contact(request):
 def bookDetails(request, id):
     book_id = int(id)
     book = get_object_or_404(Book, id=book_id)
-    return render(request, 'mainApp/bookDetails.html', {'book': book})
+    return render(request, 'mainApp/categoryDetails.html', {'book': book})
 
+
+
+def addBook(request):
+    book = BookForm()
+    if request.method == 'POST':
+        book = BookForm(request.POST, request.FILES)
+        if book.is_valid():
+           book.save()
+           return redirect('index')
+    return render(request, 'mainApp/addCategory.html', {'form': book})
+
+def deleteBook(request, id):
+    book = get_object_or_404(Book, id=id)
+    book.delete()
+    return redirect('index')
+def updateBook(request, id):
+    book = get_object_or_404(Book, id=id)
+    if request.method == 'POST':
+        if request.method == 'POST':
+            bookForm = BookForm(request.POST, request.FILES)
+            if book.is_valid():
+                book.save()
+                return redirect('index')
+    return render(request, 'mainApp/updateCategory.html', {'book': book})
+
+
+
+
+
+
+# using native html
+
+
+# def addBook(request):
+#     if request.method == 'POST':
+#         if request.FILES:
+#             image = request.FILES["image"]
+#         else:
+#             image = None
+#         print(request.POST)
+#         product = Book(title=request.POST["title"], price=request.POST["price"],
+#                           author=request.POST["author"],no_of_pages=request.POST["no_of_pages"], image=image)
+#         product.save()
+#         return redirect('index')
+#     return render(request, 'mainApp/addCategory.html')
+
+
+
+
+
+
+
+
+
+
+# def updateBook(request, id):
+#     book = get_object_or_404(Book, id=id)
+#     if request.method == 'POST':
+#         #check if there's any photoes updated or not
+#         if request.FILES:
+#             image = request.FILES["image"]
+#         else:
+#             image = book.image
+#         book.title = request.POST["title"]
+#         book.author = request.POST["author"]
+#         book.no_of_pages = request.POST["no_of_pages"]
+#         book.image = image
+#
+#         # saving into data base
+#         book.save()
+#         return redirect('index')
+#     return render(request, 'mainApp/updateCategory.html', {'book': book})
