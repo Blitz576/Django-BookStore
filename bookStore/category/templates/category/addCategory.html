@@ -1,11 +1,11 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block PageTitle %} Home {% endblock %}
-{% block Title %} Books {% endblock %}
+{% block Title %} Categories {% endblock %}
 
 {% block content %}
 <div class="container">
-    <h2>Add New Book</h2>
+    <h2>Add New Category</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 

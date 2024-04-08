@@ -1,12 +1,12 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block PageTitle %} Home {% endblock %}
-{% block Title %} Books {% endblock %}
+{% block Title %} Categories {% endblock %}
 
 {% block content %}
-    <a class="btn btn-primary" href="{% url 'addBook' %}">Add New Book</a>
+    <a class="btn btn-primary" href="{% url 'addCategory' %}">Add New Category</a>
     <div class="container mt-4">
-        <h2>Books</h2>
+        <h2>Categories</h2>
         <table class="table">
             <thead>
                 <tr>

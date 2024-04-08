@@ -25,7 +25,7 @@ def addCategory(request):
             category_form.save()
             return redirect('index')
 
-    return render(request, 'mainApp/addCategory.html', {'category_form': category_form})
+    return render(request, 'category/addCategory.html', {'category_form': category_form})
 
 
 def deleteCategory(request, category_id):
